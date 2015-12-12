@@ -25,7 +25,7 @@ public final class Manager<Level: WindowLevel> {
         _keyWindow = keyWindow
     }
     
-    subscript (level: Level) -> UIWindow {
+    public subscript (level: Level) -> UIWindow {
         
         if let window = _windows[level] {
             return window

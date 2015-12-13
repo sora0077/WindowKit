@@ -9,7 +9,9 @@
 import Foundation
 import UIKit.UIWindow
 
-final class Window: UIWindow {
+public protocol Transparentable {}
+
+final class Window: UIWindow, Transparentable {
     
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         
@@ -18,6 +20,8 @@ final class Window: UIWindow {
         if v == self { return nil }
         
         if v == self.rootViewController?.view { return nil }
+        
+        if let _ = v as? Transparentable { return nil }
         
         return v
     }

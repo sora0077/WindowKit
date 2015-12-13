@@ -13,7 +13,7 @@ import UIKit.UIView
 
 public protocol WindowLevel: Hashable {
 
-    var rawValue: UInt { get }
+    var rawValue: Int { get }
 }
 
 public final class Manager<Level: WindowLevel> {
@@ -26,6 +26,8 @@ public final class Manager<Level: WindowLevel> {
     }
     
     public subscript (level: Level) -> UIWindow {
+        
+        assert(level.rawValue > 0)
         
         if let window = _windows[level] {
             return window

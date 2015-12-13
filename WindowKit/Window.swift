@@ -13,13 +13,11 @@ final class Window: UIWindow {
     
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         
-        guard let v = super.hitTest(point, withEvent: event) where v != self else {
-            return nil
-        }
+        guard let v = super.hitTest(point, withEvent: event) else { return nil }
         
-        if v == self.rootViewController?.view {
-            return nil
-        }
+        if v == self { return nil }
+        
+        if v == self.rootViewController?.view { return nil }
         
         return v
     }

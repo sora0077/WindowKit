@@ -9,7 +9,6 @@
 import Foundation
 import UIKit.UIWindow
 import UIKit.UIScreen
-import UIKit.UIView
 
 public protocol WindowLevel: Hashable {
 

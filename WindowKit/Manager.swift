@@ -10,6 +10,7 @@ import Foundation
 import UIKit.UIWindow
 import UIKit.UIScreen
 
+
 public protocol WindowLevel: Hashable {
 
     var rawValue: Int { get }
@@ -17,7 +18,8 @@ public protocol WindowLevel: Hashable {
 
 public final class Manager<Level: WindowLevel> {
     
-    private weak var _keyWindow: UIWindow?
+    public var keyWindow: UIWindow { return _keyWindow }
+    private weak var _keyWindow: UIWindow!
     private var _windows: [Level: UIWindow] = [:]
     
     public init(keyWindow: UIWindow) {
@@ -26,7 +28,9 @@ public final class Manager<Level: WindowLevel> {
     
     public subscript (level: Level) -> UIWindow {
         
-        assert(level.rawValue > 0)
+        if level.rawValue == 0 {
+            return _keyWindow
+        }
         
         if let window = _windows[level] {
             return window

@@ -36,9 +36,9 @@ public final class Manager<Level: WindowLevel> {
             return window
         }
         
-        let window = Window(frame: UIScreen.mainScreen().bounds)
+        let window = Window(frame: UIScreen.main().bounds)
         window.windowLevel = UIWindowLevelNormal + UIWindowLevel(level.rawValue)
-        window.hidden = false
+        window.isHidden = false
         _windows[level] = window
     
         return window

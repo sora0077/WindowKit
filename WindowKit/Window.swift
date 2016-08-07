@@ -13,9 +13,9 @@ public protocol Transparentable {}
 
 final class Window: UIWindow, Transparentable {
     
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
-        guard let v = super.hitTest(point, withEvent: event) else { return nil }
+        guard let v = super.hitTest(point, with: event) else { return nil }
         
         if v == self { return nil }
         

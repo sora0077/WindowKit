@@ -10,41 +10,30 @@ import Foundation
 import UIKit.UIWindow
 import UIKit.UIScreen
 
-
 public protocol WindowLevel: Hashable {
-
     var rawValue: Int { get }
-    
     static var mainWindowLevel: Self { get }
 }
 
-
 public final class Manager<Level: WindowLevel> {
-    
     public var mainWindow: UIWindow { return _mainWindow }
     private weak var _mainWindow: UIWindow!
     private var _windows: [Level: UIWindow] = [:]
-    
+
     public init(mainWindow: UIWindow) {
         _mainWindow = mainWindow
     }
-    
+
     public subscript (level: Level) -> UIWindow {
-        
         if level == .mainWindowLevel {
             return _mainWindow
         }
-        
-        if let window = _windows[level] {
+        return _windows[level] ?? {
+            let window = Window(frame: UIScreen.main.bounds)
+            window.windowLevel = UIWindowLevelNormal + UIWindowLevel(level.rawValue)
+            window.isHidden = false
+            _windows[level] = window
             return window
-        }
-        
-        let window = Window(frame: UIScreen.main.bounds)
-        window.windowLevel = UIWindowLevelNormal + UIWindowLevel(level.rawValue)
-        window.isHidden = false
-        _windows[level] = window
-    
-        return window
+        }()
     }
-    
 }
